@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`0. snapshot for primitives 1`] = `
+Array [
+  Object {
+    "boolean": true,
+    "null": null,
+    "number": 5,
+    "string": "test",
+    "symbol": Symbol(test),
+    "undef": undefined,
+  },
+  Object {
+    "boolean": true,
+    "null": null,
+    "number": 5,
+    "string": "test",
+    "symbol": Symbol(test),
+    "undef": undefined,
+  },
+]
+`;
+
+exports[`1. snapshot for simple-rn-component 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Hello World!
+  </Text>
+</View>
+`;
+
+exports[`2. snapshot for list-rn-component 1`] = `
+<View>
+  <RCTScrollView
+    ListFooterComponent={[Function]}
+    ListHeaderComponent={[Function]}
+    data={
+      Array [
+        Object {
+          "key": "a",
+        },
+        Object {
+          "key": "b",
+        },
+        Object {
+          "key": "c",
+        },
+        Object {
+          "key": "d",
+        },
+        Object {
+          "key": "e",
+        },
+        Object {
+          "key": "f",
+        },
+        Object {
+          "key": "g",
+        },
+      ]
+    }
+    disableVirtualization={false}
+    getItem={[Function]}
+    getItemCount={[Function]}
+    horizontal={false}
+    initialNumToRender={10}
+    keyExtractor={[Function]}
+    maxToRenderPerBatch={10}
+    numColumns={1}
+    onContentSizeChange={[Function]}
+    onEndReachedThreshold={2}
+    onLayout={[Function]}
+    onMomentumScrollEnd={[Function]}
+    onScroll={[Function]}
+    onScrollBeginDrag={[Function]}
+    onScrollEndDrag={[Function]}
+    renderItem={[Function]}
+    scrollEventThrottle={50}
+    stickyHeaderIndices={Array []}
+    updateCellsBatchingPeriod={50}
+    viewabilityConfigCallbackPairs={Array []}
+    windowSize={21}
+  >
+    <View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View>
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            top of the list
+          </Text>
+        </View>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          a
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          b
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          c
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          d
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          e
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          f
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+        >
+          g
+        </Text>
+      </View>
+      <View
+        onLayout={[Function]}
+        style={null}
+      >
+        <View
+          aLongValue="a-very-long-value-that-is-irrelevant-to-snapshotting"
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+          >
+            bottom of the list
+          </Text>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`3. snapshot for rendered-object 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    An error occurred
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    {
+  "prop": "some value"
+}
+  </Text>
+</View>
+`;
