@@ -48,6 +48,12 @@ To configure the rules create a `.jestlint` file with your overrides e.g.
 }
 ```
 
+## Report
+
+The report phase is split out from the analysis to enable the previous step to be
+performed and written to disk (which is relatively fixed), allowing you to iterate on
+different criteria to get the right balance for your codebase
+
 ## Output
 
 Currently the only output is via the console with a litany of red, yellow and
