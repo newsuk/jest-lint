@@ -1,7 +1,7 @@
 import * as glob from "glob";
 import analyse from "./analyse";
 import report from "./report";
-import console from "./console";
+import writer from "./console";
 import { Options, Dir } from "./types";
 
 const getSnapshots = (cwd: Dir) =>
@@ -28,16 +28,17 @@ export default async (cwd: Dir, opts: Options) => {
   const results = await Promise.all(snapshots.map(analyse));
 
   const criteria = report({
-    genericValues: ["[Function]"],
-    maxAttr: 5,
-    maxAttrLength: 30,
-    maxDepth: 10,
-    maxFileSize: 10000,
-    maxGenericElement: 10,
-    maxLines: 300
+    genericAttrs: opts.genericAttributes || [],
+    genericValues: opts.genericValues || ["[Function]"],
+    maxAttr: opts.maxAttributes || 5,
+    maxAttrLength: opts.maxAttributeLength || 30,
+    maxDepth: opts.maxDepth || 10,
+    maxFileSize: opts.maxFileSize || 10000,
+    maxGenericElement: opts.maxGenericElements || 10,
+    maxLines: opts.maxLines || 300
   });
 
   const output = results.map(r => criteria(r));
 
-  console(output);
+  writer(output);
 };

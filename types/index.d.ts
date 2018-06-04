@@ -1,6 +1,14 @@
 import { AST } from "acorn-jsx";
 
 export interface Options {
+  maxFileSize?: number;
+  genericAttributes?: string[];
+  genericValues?: string[];
+  maxAttributes?: number;
+  maxAttributeLength?: number;
+  maxDepth?: number;
+  maxLines?: number;
+  maxGenericElements?: number;
   isVerbose: boolean;
 }
 

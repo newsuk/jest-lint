@@ -37,12 +37,12 @@ To configure the rules create a `.jestlint` file with your overrides e.g.
 
 ```
 {
-  maxFileSize: 5000,
-  genericAttributes: [
+  "maxFileSize": 5000,
+  "genericAttributes": [
     "randomProp",
     "fixedProp"
   ],
-  genericValues: [
+  "genericValues": [
     "[Function]"
   ]
 }
