@@ -4,7 +4,9 @@ import { ParsedTest } from "./types";
 const stripJestStructures = (s: string) =>
   s.replace(/Array\s\[/g, "[").replace(/Object\s\{/g, "{");
 
-const parseVal = (snapObj: { [key: string]: string }) => (key: string): ParsedTest => {
+const parseVal = (snapObj: { [key: string]: string }) => (
+  key: string
+): ParsedTest => {
   let value;
 
   try {

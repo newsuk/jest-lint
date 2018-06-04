@@ -1,9 +1,6 @@
 import { AST } from "acorn-jsx";
 
 export interface Options {
-  maxLines: number;
-  maxFileSize: number;
-  allowUndefined: boolean;
   isVerbose: boolean;
 }
 

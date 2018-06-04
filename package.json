@@ -9,7 +9,7 @@
     "prepublishOnly": "yarn tsc",
     "test": "yarn tsc && nyc ava",
     "tsc": "tsc && chmod +x index.js",
-    "fmt": "prettier --write *.ts"
+    "fmt": "prettier --write *.ts README.md"
   },
   "bin": {
     "jest-lint": "./index.js"

@@ -81,9 +81,7 @@ test("should return the generic value error", t => {
 
   const result = report(criteria)(analysis);
 
-  const listComponentLints = result.lints.find(
-    ({ key }) => key === listKey
-  );
+  const listComponentLints = result.lints.find(({ key }) => key === listKey);
 
   t.snapshot(listComponentLints);
 });
