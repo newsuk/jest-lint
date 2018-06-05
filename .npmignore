@@ -5,7 +5,7 @@ generate-snapshots.js
 tsconfig.json
 *.map
 make-analyse-fixtures.js
-yarn.llock
+yarn.lock
 __snapshots__
 ava-snapshots
 .idea
