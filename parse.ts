@@ -2,7 +2,10 @@ const acorn = require("acorn-jsx");
 import { ParsedTest } from "./types";
 
 const stripJestStructures = (s: string) =>
-  s.replace(/Array\s\[/g, "[").replace(/Object\s\{/g, "{");
+  s
+    .replace(/Array\s\[/g, "[")
+    .replace(/Object\s\{/g, "{")
+    .replace(/>[\s]*{.*}[\s]*</gs, ">[Replaced Object]<");
 
 const parseVal = (snapObj: { [key: string]: string }) => (
   key: string
