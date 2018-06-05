@@ -5,10 +5,10 @@ import report from "./report";
 import writer from "./console";
 import { Options, Dir } from "./types";
 
-const getSnapshots = (cwd: Dir) =>
+const getSnapshots = (cwd: Dir, snapPattern?: string) =>
   new Promise<string[]>((res, rej) => {
     glob(
-      "**/*.js.snap",
+      snapPattern || "**/*.js.snap",
       {
         cwd,
         ignore: ["**/node_modules/**"]
@@ -28,7 +28,7 @@ const getSnapshots = (cwd: Dir) =>
   });
 
 export default async (cwd: Dir, opts: Options) => {
-  const snapshots = await getSnapshots(cwd);
+  const snapshots = await getSnapshots(cwd, opts.snapPattern);
 
   const results = await Promise.all(snapshots.map(analyse));
 

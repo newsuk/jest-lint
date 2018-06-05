@@ -142,3 +142,11 @@ If a snapshot is filled with primitives with no props it is likely that either
 there are too many of them in general or the test isn't specific enough. For
 example 15 `div` elements suggest a lot of "div noise" rather than a specific
 render test
+
+## Additional config options
+
+### snapPattern: string
+
+**default**: \*\*/\*.js.snap
+
+This is relative to the `cwd`
