@@ -11,7 +11,7 @@ const getSnapshots = (cwd: Dir) =>
       "**/*.js.snap",
       {
         cwd,
-        ignore: ["node_modules/**"]
+        ignore: ["**/node_modules/**"]
       },
       (err, matches) => {
         if (err) {
