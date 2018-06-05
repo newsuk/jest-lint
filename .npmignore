@@ -1,0 +1,12 @@
+.*
+*.test*
+generate-snapshots.js
+*.ts
+tsconfig.json
+*.map
+make-analyse-fixtures.js
+yarn.llock
+__snapshots__
+ava-snapshots
+.idea
+

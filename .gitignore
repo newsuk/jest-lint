@@ -2,6 +2,7 @@ node_modules
 coverage
 *.js
 *.map
+*.tgz
 .nyc_output
 !generate-snapshots.js
 !fixture-keys.js
