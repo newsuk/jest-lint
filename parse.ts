@@ -11,18 +11,30 @@ const parseVal = (snapObj: { [key: string]: string }) => (
   key: string
 ): ParsedTest => {
   let value;
+  const sanitised = stripJestStructures(snapObj[key]);
 
   try {
-    value = acorn.parse(stripJestStructures(snapObj[key]), {
+    value = acorn.parse(sanitised, {
       plugins: { jsx: true }
     });
   } catch (e) {
-    return {
-      key,
-      rawValue: snapObj[key],
-      value: null,
-      error: e.message
-    };
+    try {
+      // confirm this is simply JSON that we don't care about
+      JSON.parse(JSON.stringify(sanitised));
+
+      return {
+        key,
+        rawValue: snapObj[key],
+        value: null
+      };
+    } catch (e) {
+      return {
+        key,
+        rawValue: snapObj[key],
+        value: null,
+        error: e.message
+      };
+    }
   }
 
   return {

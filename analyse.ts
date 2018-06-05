@@ -85,12 +85,20 @@ const analyseSnapshot = (snapshot: ParsedTest): TestAnalysis => {
   const snapshotLength =
     snapshot.rawValue.length - snapshot.rawValue.replace(/\n/g, "").length + 1;
 
-  if (snapshot.value === null) {
+  if (snapshot.error) {
     return {
       key: snapshot.key,
       lines: snapshotLength,
       elements: [],
       error: snapshot.error
+    };
+  }
+
+  if (!snapshot.value) {
+    return {
+      key: snapshot.key,
+      lines: snapshotLength,
+      elements: []
     };
   }
 

@@ -52,6 +52,42 @@ const renderedObject = TestRenderer.create(
   </View>
 );
 
+const justAnObject = {
+  action: "Viewed",
+  attrs: {
+    byline:
+      "Rosemary Bennett, Education Editor | Nicola Woolcock, Education Correspondent",
+    eventTime: "2018-01-01T00:00:00.000Z",
+    headline:
+      "Caribbean islands devastated by Hurricane Irma, the worst Atlantic storm on record",
+    publishedTime: "2015-03-13T18:54:58.000Z",
+    topics: [
+      {
+        name: "Football",
+        slug: "football"
+      },
+      {
+        name: "Manchester United FC",
+        slug: "manchester-united"
+      },
+      {
+        name: "Chelsea FC",
+        slug: "chelsea"
+      },
+      {
+        name: "Arsenal",
+        slug: "arsenal"
+      },
+      {
+        name: "Rugby Union",
+        slug: "rugby-union"
+      }
+    ]
+  },
+  component: "Page",
+  object: "Article"
+};
+
 const tests = [
   {
     key: "primitives",
@@ -85,6 +121,10 @@ const tests = [
   {
     key: "rendered-object",
     value: renderedObject.toJSON()
+  },
+  {
+    key: "just-an-object",
+    value: justAnObject
   }
 ];
 
