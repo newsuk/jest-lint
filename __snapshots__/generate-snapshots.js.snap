@@ -37,7 +37,7 @@ exports[`2. snapshot for list-rn-component 1`] = `
 <View>
   <RCTScrollView
     ListFooterComponent={[Function]}
-    ListHeaderComponent={[Function]}
+    ListHeaderComponent={<HeaderComponent />}
     data={
       Array [
         Object {

@@ -7,6 +7,7 @@ import {
 } from "./types";
 import {
   ArrayElement,
+  ArrayExpression,
   JSXAttribute,
   JSXElement,
   Literal,
@@ -41,7 +42,7 @@ const extractElement = (element: ArrayElement) => {
   return element.properties.map(extractProp);
 };
 
-const extractProps = ({ name, value }: JSXAttribute) => {
+const extractProps = (depth: number) => ({ name, value }: JSXAttribute) => {
   let propValue;
 
   if (value.type === "Literal") {
@@ -50,8 +51,13 @@ const extractProps = ({ name, value }: JSXAttribute) => {
     propValue = value.expression.value;
   } else if (value.expression.type === "ObjectExpression") {
     propValue = value.expression.properties.map(extractProp);
-  } else {
+  } else if (value.expression.type === "ArrayExpression") {
     propValue = value.expression.elements.map(extractElement);
+  } else {
+    return {
+      key: name.name,
+      value: traverse(depth + 1)(value.expression)
+    };
   }
 
   return {
@@ -67,7 +73,7 @@ const flatten = (depth: number) => (ys: Element[], y: JSXElement) => {
 const traverse = (depth: number) => (x: JSXElement): Element[] => {
   const oe = x.openingElement;
   const elementName = oe.name.name;
-  const props = oe.attributes.map(extractProps);
+  const props = oe.attributes.map(extractProps(depth));
 
   return [
     {

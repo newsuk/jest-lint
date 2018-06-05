@@ -30,10 +30,10 @@ const data = [
   { key: "g" }
 ];
 
-const ListComponent = () => (
+const ListComponent = ({ header }) => (
   <FlatList
     data={data}
-    ListHeaderComponent={() => <HeaderComponent />}
+    ListHeaderComponent={header}
     ListFooterComponent={() => <FooterComponent />}
     renderItem={({ item }) => <Text>{item.key}</Text>}
   />
@@ -41,7 +41,7 @@ const ListComponent = () => (
 
 const listRenderer = TestRenderer.create(
   <View>
-    <ListComponent />
+    <ListComponent header={<HeaderComponent />} />
   </View>
 );
 
