@@ -1,4 +1,5 @@
 import * as glob from "glob";
+import chalk from "chalk";
 import analyse from "./analyse";
 import report from "./report";
 import writer from "./console";
@@ -15,6 +16,10 @@ const getSnapshots = (cwd: Dir) =>
       (err, matches) => {
         if (err) {
           return rej(err);
+        }
+
+        if (matches.length === 0) {
+          console.log(chalk.yellow("No snaps were found"));
         }
 
         return res(matches);
