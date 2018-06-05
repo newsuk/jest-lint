@@ -1,6 +1,7 @@
 import { AST } from "acorn-jsx";
 
 export interface Options {
+  snapPattern?: string;
   maxFileSize?: number;
   genericAttributes?: string[];
   genericValues?: string[];
