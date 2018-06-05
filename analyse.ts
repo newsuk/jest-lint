@@ -53,6 +53,8 @@ const extractProps = (depth: number) => ({ name, value }: JSXAttribute) => {
     propValue = value.expression.properties.map(extractProp);
   } else if (value.expression.type === "ArrayExpression") {
     propValue = value.expression.elements.map(extractElement);
+  } else if (value.expression.type === "Identifier") {
+    propValue = value.expression.name;
   } else {
     return {
       key: name.name,
