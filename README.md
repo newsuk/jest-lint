@@ -102,14 +102,23 @@ If an element has too many attributes then it's unlikely everyone is vital
 to the component under test and will end up contributing to changes not related
 to the test when things change
 
-### MaxAttrLengthError
+### MaxAttrArrayLengthError
 
-**config option**: `maxAttributeLength: number`
+**config option**: `maxAttributeArrayLength: number`
+
+**default**: `5`
+
+If a prop has a value that is very long it is unlikely the whole value is of
+interest to the test and can be shortened for easier diffing, certainly for lists
+
+### MaxAttrStringLengthError
+
+**config option**: `maxAttributeStringLength: number`
 
 **default**: `30`
 
 If a prop has a value that is very long it is unlikely the whole value is of
-interest to the test and can be shortened for easier diffing
+interest to the test and can be shortened to an example for easier diffing
 
 ### MaxDepthError
 

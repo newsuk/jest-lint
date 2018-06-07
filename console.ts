@@ -74,10 +74,20 @@ export default (sas: Report[]): void => {
           );
         }
 
-        if (e.type === "MAX_ATTR_LENGTH") {
+        if (e.type === "MAX_ATTR_ARR_LENGTH") {
           console.log(
             chalk.red(
-              `Maximum Attribute Length: ${e.elementName} ${
+              `Maximum Attribute Array Length: ${e.elementName} ${
+                e.attributeName
+              } has a length of ${e.attributeLength}`
+            )
+          );
+        }
+
+        if (e.type === "MAX_ATTR_STR_LENGTH") {
+          console.log(
+            chalk.red(
+              `Maximum Attribute String Length: ${e.elementName} ${
                 e.attributeName
               } has a length of ${e.attributeLength}`
             )

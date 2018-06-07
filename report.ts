@@ -52,15 +52,28 @@ const reportOnTest = (criteria: Criteria) => (analysis: TestAnalysis): Lint => {
       }
 
       if (
-        criteria.maxAttrLength &&
-        p.value &&
-        p.value.toString().length > criteria.maxAttrLength
+        criteria.maxAttrArrayLength !== undefined &&
+        Array.isArray(p.value) &&
+        p.value.length > criteria.maxAttrArrayLength
       ) {
         errors.push({
-          type: "MAX_ATTR_LENGTH",
+          type: "MAX_ATTR_ARR_LENGTH",
           elementName: e.elementName,
           attributeName: p.key,
-          attributeLength: p.value.toString().length
+          attributeLength: p.value.length
+        });
+      }
+
+      if (
+        criteria.maxAttrStringLength !== undefined &&
+        typeof p.value === "string" &&
+        p.value.length > criteria.maxAttrStringLength
+      ) {
+        errors.push({
+          type: "MAX_ATTR_STR_LENGTH",
+          elementName: e.elementName,
+          attributeName: p.key,
+          attributeLength: p.value.length
         });
       }
     });
