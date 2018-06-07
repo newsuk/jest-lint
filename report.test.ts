@@ -8,6 +8,7 @@ let analysis: SnapshotAnalysis;
 
 const simpleKey = "1. snapshot for simple-rn-component 1";
 const listKey = "2. snapshot for list-rn-component 1";
+const primitivesKey = "0. snapshot for primitives 1";
 
 test.before(async () => {
   analysis = await analyse(
@@ -148,4 +149,14 @@ test("should return the max generic element warning", t => {
   const listComponentLints = result.lints.find(({ key }) => key === listKey);
 
   t.snapshot(listComponentLints);
+});
+
+test("should return the no elements found warning", t => {
+  const criteria = {};
+
+  const result = report(criteria)(analysis);
+
+  const primitivesLints = result.lints.find(({ key }) => key === primitivesKey);
+
+  t.snapshot(primitivesLints);
 });

@@ -1,6 +1,8 @@
 const React = require("react");
 const { View, Text, FlatList } = require("react-native");
 const TestRenderer = require("react-test-renderer");
+const styled = require("styled-components").default;
+require("jest-styled-components");
 
 const simpleRenderer = TestRenderer.create(
   <View>
@@ -51,6 +53,14 @@ const renderedObject = TestRenderer.create(
     <Text>{JSON.stringify({ prop: "some value" }, null, 2)}</Text>
   </View>
 );
+
+const StyledH1 = styled.h1`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+`;
+
+const styledObject = TestRenderer.create(<StyledH1 />);
 
 const justAnObject = {
   action: "Viewed",
@@ -125,6 +135,10 @@ const tests = [
   {
     key: "just-an-object",
     value: justAnObject
+  },
+  {
+    key: "a-styled-object",
+    value: styledObject.toJSON()
   }
 ];
 
