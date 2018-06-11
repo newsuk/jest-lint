@@ -117,6 +117,12 @@ const reportOnTest = (criteria: Criteria) => (analysis: TestAnalysis): Lint => {
     }
   });
 
+  if (analysis.elements.length === 0) {
+    warnings.push({
+      type: "NO_ELEMENTS_FOUND"
+    });
+  }
+
   return {
     key: analysis.key,
     warnings,

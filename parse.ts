@@ -7,6 +7,26 @@ const stripJestStructures = (s: string) =>
     .replace(/Object\s\{/g, "{")
     .replace(/>[\s]*{.*}[\s]*</gs, ">[Replaced Object]<");
 
+const tryJson = (key: string, rawValue: string, value: string) => {
+  try {
+    // confirm this is simply JSON that we don't care about
+    JSON.parse(JSON.stringify(value));
+
+    return {
+      key,
+      rawValue,
+      value: null
+    };
+  } catch (e) {
+    return {
+      key,
+      rawValue,
+      value: null,
+      error: e.message
+    };
+  }
+};
+
 const parseVal = (snapObj: { [key: string]: string }) => (
   key: string
 ): ParsedTest => {
@@ -18,22 +38,21 @@ const parseVal = (snapObj: { [key: string]: string }) => (
       plugins: { jsx: true }
     });
   } catch (e) {
-    try {
-      // confirm this is simply JSON that we don't care about
-      JSON.parse(JSON.stringify(sanitised));
+    // pending outcome of https://github.com/styled-components/jest-styled-components/issues/135
+    const noStyledComponentStyles = sanitised
+      .slice(sanitised.indexOf("<"))
+      .trim();
 
-      return {
-        key,
-        rawValue: snapObj[key],
-        value: null
-      };
-    } catch (e) {
-      return {
-        key,
-        rawValue: snapObj[key],
-        value: null,
-        error: e.message
-      };
+    if (noStyledComponentStyles.length > 0) {
+      try {
+        value = acorn.parse(noStyledComponentStyles, {
+          plugins: { jsx: true }
+        });
+      } catch (e) {}
+    }
+
+    if (!value) {
+      return tryJson(key, snapObj[key], sanitised);
     }
   }
 

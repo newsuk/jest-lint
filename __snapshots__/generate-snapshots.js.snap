@@ -261,3 +261,15 @@ Object {
   "object": "Article",
 }
 `;
+
+exports[`5. snapshot for a-styled-object 1`] = `
+.c0 {
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+}
+
+<h1
+  className="c0"
+/>
+`;

@@ -108,13 +108,17 @@ export default (sas: Report[]): void => {
       }
 
       l.warnings.forEach(w => {
-        console.log(
-          chalk.yellow(
-            `Max Generic Elements: Too many (${w.count}) generic elements (${
-              w.elementName
-            }) reduce the clarity of a snapshot`
-          )
-        );
+        if (w.type === "NO_ELEMENTS_FOUND") {
+          console.log(chalk.yellow("No JSX found"));
+        } else {
+          console.log(
+            chalk.yellow(
+              `Max Generic Elements: Too many (${w.count}) generic elements (${
+                w.elementName
+              }) reduce the clarity of a snapshot`
+            )
+          );
+        }
       });
     });
 

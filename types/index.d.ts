@@ -74,7 +74,11 @@ export type MaxGenericElementWarning = {
   count: number;
 };
 
-export type TestWarn = MaxGenericElementWarning;
+export type NoElementsFoundWarning = {
+  type: "NO_ELEMENTS_FOUND";
+};
+
+export type TestWarn = NoElementsFoundWarning | MaxGenericElementWarning;
 
 export type Prop = {
   key: string;
