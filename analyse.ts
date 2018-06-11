@@ -7,12 +7,9 @@ import {
 } from "./types";
 import {
   ArrayElement,
-  ArrayExpression,
   JSXAttribute,
   JSXElement,
-  Literal,
-  ObjectExpression,
-  Property
+  Property,
 } from "acorn-jsx";
 import { readFile, stat } from "fs-extra";
 import * as path from "path";
@@ -56,6 +53,8 @@ const extractProps = (depth: number) => ({ name, value }: JSXAttribute) => {
     propValue = value.expression.elements.map(extractElement);
   } else if (value.expression.type === "Identifier") {
     propValue = value.expression.name;
+  } else if (value.expression.type === "UnaryExpression") {
+    propValue = value.expression.operator;
   } else {
     return {
       key: name.name,
@@ -75,6 +74,7 @@ const flatten = (depth: number) => (ys: Element[], y: JSXElement) => {
 
 const traverse = (depth: number) => (x: JSXElement): Element[] => {
   const oe = x.openingElement;
+
   const elementName = oe.name.name;
   const props = oe.attributes.map(extractProps(depth));
 

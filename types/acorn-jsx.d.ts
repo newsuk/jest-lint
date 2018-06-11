@@ -23,7 +23,7 @@ declare module "acorn-jsx" {
     type: "JSXExpressionContainer";
     start: number;
     end: number;
-    expression: ArrayExpression | JSXElement | Identifier | Literal | ObjectExpression;
+    expression: ArrayExpression | JSXElement | Identifier | Literal | ObjectExpression | UnaryExpression;
   };
 
   type Identifier = {
