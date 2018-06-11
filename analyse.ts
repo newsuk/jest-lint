@@ -23,7 +23,7 @@ const extractProp = (prop: Property) => ({
   value: sanitiseValue(prop.value.value)
 });
 
-const extractElement = depth => (element: ArrayElement) => {
+const extractElement = (depth: number) => (element: ArrayElement) => {
   if (element.type === "Identifier") {
     return element.name;
   } else if (element.type === "Literal") {
