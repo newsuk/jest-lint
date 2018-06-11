@@ -5,12 +5,7 @@ import {
   SnapshotAnalysis,
   TestAnalysis
 } from "./types";
-import {
-  ArrayElement,
-  JSXAttribute,
-  JSXElement,
-  Property,
-} from "acorn-jsx";
+import { ArrayElement, JSXAttribute, JSXElement, Property } from "acorn-jsx";
 import { readFile, stat } from "fs-extra";
 import * as path from "path";
 import parse from "./parse";
@@ -28,13 +23,15 @@ const extractProp = (prop: Property) => ({
   value: sanitiseValue(prop.value.value)
 });
 
-const extractElement = (element: ArrayElement) => {
+const extractElement = depth => (element: ArrayElement) => {
   if (element.type === "Identifier") {
     return element.name;
   } else if (element.type === "Literal") {
     return element.value;
   } else if (element.type === "UnaryExpression") {
     return element.argument.value;
+  } else if (element.type === "JSXElement") {
+    return traverse(depth + 1)(element);
   }
 
   return element.properties.map(extractProp);
@@ -50,7 +47,7 @@ const extractProps = (depth: number) => ({ name, value }: JSXAttribute) => {
   } else if (value.expression.type === "ObjectExpression") {
     propValue = value.expression.properties.map(extractProp);
   } else if (value.expression.type === "ArrayExpression") {
-    propValue = value.expression.elements.map(extractElement);
+    propValue = value.expression.elements.map(extractElement(depth));
   } else if (value.expression.type === "Identifier") {
     propValue = value.expression.name;
   } else if (value.expression.type === "UnaryExpression") {

@@ -69,7 +69,7 @@ declare module "acorn-jsx" {
     argument: Literal;
   };
 
-  type ArrayElement = Identifier | Literal | ObjectExpression | UnaryExpression;
+  type ArrayElement = Identifier | JSXElement | Literal | ObjectExpression | UnaryExpression;
 
   type ArrayExpression = {
     type: "ArrayExpression";
