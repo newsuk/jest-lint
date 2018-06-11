@@ -110,6 +110,12 @@ const lengthTest = TestRenderer.create(
   <LengthTest data={data} long="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
 );
 
+const arrayOfComponents = TestRenderer.create([
+  <Text key="1">One</Text>,
+  <Text key="2">Two</Text>,
+  <Text key="3">Three</Text>
+]);
+
 const tests = [
   {
     key: "primitives",
@@ -155,6 +161,10 @@ const tests = [
   {
     key: "length-tests",
     value: lengthTest.toJSON()
+  },
+  {
+    key: "array-of-components",
+    value: arrayOfComponents.toJSON()
   }
 ];
 
