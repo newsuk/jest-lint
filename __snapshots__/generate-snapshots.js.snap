@@ -273,3 +273,36 @@ exports[`5. snapshot for a-styled-object 1`] = `
   className="c0"
 />
 `;
+
+exports[`6. snapshot for length-tests 1`] = `
+<View>
+  <View
+    data={
+      Array [
+        Object {
+          "key": "a",
+        },
+        Object {
+          "key": "b",
+        },
+        Object {
+          "key": "c",
+        },
+        Object {
+          "key": "d",
+        },
+        Object {
+          "key": "e",
+        },
+        Object {
+          "key": "f",
+        },
+        Object {
+          "key": "g",
+        },
+      ]
+    }
+    long="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  />
+</View>
+`;

@@ -98,6 +98,18 @@ const justAnObject = {
   object: "Article"
 };
 
+const Lengthy = ({ data, long }) => <View data={data} long={long} />;
+
+const LengthTest = props => (
+  <View>
+    <Lengthy {...props} />
+  </View>
+);
+
+const lengthTest = TestRenderer.create(
+  <LengthTest data={data} long="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+);
+
 const tests = [
   {
     key: "primitives",
@@ -139,6 +151,10 @@ const tests = [
   {
     key: "a-styled-object",
     value: styledObject.toJSON()
+  },
+  {
+    key: "length-tests",
+    value: lengthTest.toJSON()
   }
 ];
 

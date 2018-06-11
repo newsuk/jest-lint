@@ -6,7 +6,8 @@ export interface Options {
   genericAttributes?: string[];
   genericValues?: string[];
   maxAttributes?: number;
-  maxAttributeLength?: number;
+  maxAttributeArrayLength?: number;
+  maxAttributeStringLength?: number;
   maxDepth?: number;
   maxLines?: number;
   maxGenericElements?: number;
@@ -42,8 +43,15 @@ export type MaxAttributeError = {
   count: number;
 };
 
-export type MaxAttrLengthError = {
-  type: "MAX_ATTR_LENGTH";
+export type MaxAttrArrayLengthError = {
+  type: "MAX_ATTR_ARR_LENGTH";
+  elementName: string;
+  attributeName: string;
+  attributeLength: number;
+};
+
+export type MaxAttrStringLengthError = {
+  type: "MAX_ATTR_STR_LENGTH";
   elementName: string;
   attributeName: string;
   attributeLength: number;
@@ -64,7 +72,8 @@ export type TestError =
   | GenericAttributeError
   | GenericValueError
   | MaxAttributeError
-  | MaxAttrLengthError
+  | MaxAttrArrayLengthError
+  | MaxAttrStringLengthError
   | MaxDepthError
   | MaxLinesError;
 
@@ -108,7 +117,8 @@ export type Criteria = {
   genericAttrs?: string[];
   genericValues?: string[];
   maxAttr?: number;
-  maxAttrLength?: number;
+  maxAttrArrayLength?: number;
+  maxAttrStringLength?: number;
   maxDepth?: number;
   maxFileSize?: number;
   maxGenericElement?: number;

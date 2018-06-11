@@ -9,6 +9,7 @@ let analysis: SnapshotAnalysis;
 const simpleKey = "1. snapshot for simple-rn-component 1";
 const listKey = "2. snapshot for list-rn-component 1";
 const primitivesKey = "0. snapshot for primitives 1";
+const lengthKey = "6. snapshot for length-tests 1";
 
 test.before(async () => {
   analysis = await analyse(
@@ -101,16 +102,32 @@ test("should return the max attribute error", t => {
   t.snapshot(simpleComponentLints);
 });
 
-test("should return the max attribute length error", t => {
+test("should return the max attribute length error for a string", t => {
   const criteria = {
-    maxAttrLength: 20
+    maxAttrStringLength: 20
   };
 
   const result = report(criteria)(analysis);
 
-  const listComponentLints = result.lints.find(({ key }) => key === listKey);
+  const lengthComponentLints = result.lints.find(
+    ({ key }) => key === lengthKey
+  );
 
-  t.snapshot(listComponentLints);
+  t.snapshot(lengthComponentLints);
+});
+
+test("should return the max attribute length error for an array", t => {
+  const criteria = {
+    maxAttrArrayLength: 3
+  };
+
+  const result = report(criteria)(analysis);
+
+  const lengthComponentLints = result.lints.find(
+    ({ key }) => key === lengthKey
+  );
+
+  t.snapshot(lengthComponentLints);
 });
 
 test("should return the max depth error", t => {
