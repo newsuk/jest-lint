@@ -15,6 +15,7 @@ import {
   Property
 } from "acorn-jsx";
 import { readFile, stat } from "fs-extra";
+import * as path from "path";
 import parse from "./parse";
 
 const sanitiseValue = (v: Object) => {
@@ -128,7 +129,7 @@ const analyseSnapshot = (snapshot: ParsedTest): TestAnalysis => {
 };
 
 export default async (snapshotPath: FilePath): Promise<SnapshotAnalysis> => ({
-  path: snapshotPath,
+  path: path.parse(snapshotPath).base,
   fileSize: (await stat(snapshotPath)).size,
   analyses: parse(await readFile(snapshotPath, "utf8")).map(analyseSnapshot)
 });
