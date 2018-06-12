@@ -306,3 +306,29 @@ exports[`6. snapshot for length-tests 1`] = `
   />
 </View>
 `;
+
+exports[`7. snapshot for array-of-components 1`] = `
+Array [
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    One
+  </Text>,
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Two
+  </Text>,
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+  >
+    Three
+  </Text>,
+]
+`;
