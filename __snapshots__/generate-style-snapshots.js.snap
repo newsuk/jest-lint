@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1. snapshot for style block 1`] = `
+<style>
+{
+  "IS1": {
+    "color": "blue",
+  },
+}
+</style>
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  className="IS1"
+  ellipsizeMode="tail"
+  foo="bar"
+>
+  Some text
+</Text>
+`;

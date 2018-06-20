@@ -3,6 +3,7 @@ coverage
 *.js
 *.map
 *.tgz
+*.log
 .nyc_output
 !generate-snapshots.js
 !fixture-keys.js

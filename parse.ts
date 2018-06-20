@@ -5,7 +5,8 @@ const stripJestStructures = (s: string) =>
   s
     .replace(/Array\s\[/g, "[")
     .replace(/Object\s\{/g, "{")
-    .replace(/>[\s]*{.*}[\s]*</gs, ">[Replaced Object]<");
+    .replace(/>[\s]*{.*}[\s]*</gs, ">[Replaced Object]<")
+    .replace(/<style>.*<\/style>/gs, "");
 
 const tryJson = (key: string, rawValue: string, value: string) => {
   try {
