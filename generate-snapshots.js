@@ -1,5 +1,5 @@
 const React = require("react");
-const { View, Text, FlatList } = require("react-native");
+const { View, Text, FlatList, StyleSheet } = require("react-native");
 const TestRenderer = require("react-test-renderer");
 const styled = require("styled-components").default;
 require("jest-styled-components");
@@ -116,6 +116,21 @@ const arrayOfComponents = TestRenderer.create([
   <Text key="3">Three</Text>
 ]);
 
+const styles = StyleSheet.create({
+  huge: {
+    backgroundColor: "blue",
+    color: "red",
+    fontSize: 15,
+    paddingTop: 20,
+    paddingRight: 21,
+    paddingBottom: 22,
+    paddingLeft: 23,
+    textAlign: "center"
+  }
+});
+
+const hugeStyle = TestRenderer.create(<Text style={styles.huge} />);
+
 const tests = [
   {
     key: "primitives",
@@ -165,6 +180,10 @@ const tests = [
   {
     key: "array-of-components",
     value: arrayOfComponents.toJSON()
+  },
+  {
+    key: "huge-style",
+    value: hugeStyle.toJSON()
   }
 ];
 

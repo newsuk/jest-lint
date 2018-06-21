@@ -332,3 +332,23 @@ Array [
   </Text>,
 ]
 `;
+
+exports[`8. snapshot for huge-style 1`] = `
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Object {
+      "backgroundColor": "blue",
+      "color": "red",
+      "fontSize": 15,
+      "paddingBottom": 22,
+      "paddingLeft": 23,
+      "paddingRight": 21,
+      "paddingTop": 20,
+      "textAlign": "center",
+    }
+  }
+/>
+`;

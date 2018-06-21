@@ -6,5 +6,6 @@ coverage
 *.log
 .nyc_output
 !generate-snapshots.js
+!generate-style-snapshots.js
 !fixture-keys.js
 !fixture-values.js
