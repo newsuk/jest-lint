@@ -28,22 +28,29 @@
   "jest": {
     "preset": "react-native",
     "testMatch": [
-      "**/generate-snapshots.js"
+      "**/generate-snapshots.js",
+      "**/generate-style-snapshots.js"
     ]
   },
   "devDependencies": {
+    "@times-components/jest-serializer": "1.0.1",
     "@types/fs-extra": "5.0.2",
     "@types/glob": "5.0.35",
     "@types/jest": "22.2.3",
     "@types/node": "10.1.0",
     "ava": "1.0.0-beta.4",
     "babel-preset-react-native": "4.0.0",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
     "jest": "23.0.0",
     "jest-styled-components": "5.0.1",
     "nyc": "11.8.0",
     "prettier": "1.12.1",
     "react": "16.4.0",
+    "react-art": "16.4.1",
+    "react-dom": "16.4.1",
     "react-native": "0.55.4",
+    "react-native-web": "0.8.4",
     "react-test-renderer": "16.4.0",
     "styled-components": "3.3.2",
     "typescript": "2.8.3"
