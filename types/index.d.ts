@@ -91,6 +91,7 @@ export type TestWarn = NoElementsFoundWarning | MaxGenericElementWarning;
 
 export type Prop = {
   key: string;
+  type: string;
   value: Object;
 };
 

@@ -2,6 +2,7 @@ import {
   Element,
   FilePath,
   ParsedTest,
+  Prop,
   SnapshotAnalysis,
   TestAnalysis
 } from "./types";
@@ -37,30 +38,42 @@ const extractElement = (depth: number) => (element: ArrayElement) => {
   return element.properties.map(extractProp);
 };
 
-const extractProps = (depth: number) => ({ name, value }: JSXAttribute) => {
+const extractProps = (depth: number) => ({
+  name,
+  value
+}: JSXAttribute): Prop => {
+  let type;
   let propValue;
 
   if (value.type === "Literal") {
+    type = value.type;
     propValue = value.value;
   } else if (value.expression.type === "Literal") {
+    type = value.expression.type;
     propValue = value.expression.value;
   } else if (value.expression.type === "ObjectExpression") {
+    type = value.expression.type;
     propValue = value.expression.properties.map(extractProp);
   } else if (value.expression.type === "ArrayExpression") {
+    type = value.expression.type;
     propValue = value.expression.elements.map(extractElement(depth));
   } else if (value.expression.type === "Identifier") {
+    type = value.expression.type;
     propValue = value.expression.name;
   } else if (value.expression.type === "UnaryExpression") {
+    type = value.expression.type;
     propValue = value.expression.operator;
   } else {
     return {
       key: name.name,
+      type: value.expression.type,
       value: traverse(depth + 1)(value.expression)
     };
   }
 
   return {
     key: name.name,
+    type,
     value: sanitiseValue(propValue)
   };
 };

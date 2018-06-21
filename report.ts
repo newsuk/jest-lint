@@ -53,6 +53,7 @@ const reportOnTest = (criteria: Criteria) => (analysis: TestAnalysis): Lint => {
 
       if (
         criteria.maxAttrArrayLength !== undefined &&
+        p.type === "ArrayExpression" &&
         Array.isArray(p.value) &&
         p.value.length > criteria.maxAttrArrayLength
       ) {
