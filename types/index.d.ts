@@ -11,6 +11,7 @@ export interface Options {
   maxDepth?: number;
   maxLines?: number;
   maxGenericElements?: number;
+  usingCI: boolean;
   isVerbose: boolean;
 }
 

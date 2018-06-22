@@ -3,7 +3,7 @@ import chalk from "chalk";
 import analyse from "./analyse";
 import report from "./report";
 import writer from "./console";
-import { Options, Dir } from "./types";
+import { Dir, Options, Report } from "./types";
 
 const getSnapshots = (cwd: Dir, snapPattern?: string) =>
   new Promise<string[]>((res, rej) => {
@@ -27,6 +27,8 @@ const getSnapshots = (cwd: Dir, snapPattern?: string) =>
     );
   });
 
+const reportHasError = (r: Report) => r.errors.length > 0;
+
 export default async (cwd: Dir, opts: Options) => {
   const snapshots = await getSnapshots(cwd, opts.snapPattern);
 
@@ -46,5 +48,12 @@ export default async (cwd: Dir, opts: Options) => {
 
   const output = results.map(r => criteria(r));
 
-  writer(output);
+  writer(output, {
+    errorsOnly: opts.usingCI,
+    isVerbose: opts.isVerbose
+  });
+
+  if (opts.usingCI && output.some(reportHasError)) {
+    process.exit(1);
+  }
 };
