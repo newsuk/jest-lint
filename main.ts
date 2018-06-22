@@ -53,7 +53,7 @@ export default async (cwd: Dir, opts: Options) => {
     isVerbose: opts.isVerbose
   });
 
-  if (opts.usingCI && output.some(reportHasError)) {
+  if (output.some(reportHasError)) {
     process.exit(1);
   }
 };
