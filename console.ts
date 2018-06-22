@@ -1,5 +1,5 @@
-import chalk from "chalk";
 import { Report, TestError } from "./types";
+import Logger from "./logger";
 
 const sortByType = (a: TestError, b: TestError): -1 | 0 | 1 => {
   if (a.type < b.type) {
@@ -13,21 +13,29 @@ const sortByType = (a: TestError, b: TestError): -1 | 0 | 1 => {
   return 0;
 };
 
-export default (sas: Report[]): void => {
+type Options = {
+  errorsOnly?: boolean;
+  isVerbose?: boolean;
+};
+
+export default (sas: Report[], opts: Options = {}): void => {
+  const logger = new Logger({
+    errorsOnly: opts.errorsOnly,
+    isVerbose: opts.isVerbose
+  });
+
   sas.forEach(sa => {
-    console.log(chalk.white(sa.path));
+    logger.log(sa.path);
 
     if (sa.errors.length > 0) {
-      console.log(chalk.red("Snapshot errors:"));
+      logger.error("Snapshot errors:");
     }
 
     sa.errors.forEach(e => {
-      console.log(
-        chalk.red(
-          `• ${
-            e.size
-          } bytes is too large, consider breaking your tests into separate snapshot files`
-        )
+      logger.error(
+        `• ${
+          e.size
+        } bytes is too large, consider breaking your tests into separate snapshot files`
       );
     });
 
@@ -36,12 +44,12 @@ export default (sas: Report[]): void => {
 
     sa.lints.forEach(l => {
       if (l.error || l.errors.length > 0 || l.warnings.length > 0) {
-        console.log(chalk.white(l.key));
+        logger.log(l.key);
       }
 
       if (l.error) {
         hasErrors = true;
-        console.log(chalk.red(`Snapshot could not be parsed: ${l.error}`));
+        logger.error(`Snapshot could not be parsed: ${l.error}`);
         return;
       }
 
@@ -53,62 +61,48 @@ export default (sas: Report[]): void => {
 
       l.errors.forEach(e => {
         if (e.type === "GENERIC_ATTR") {
-          console.log(
-            chalk.red(
-              `Generic Attributes: ${e.elementName} has ${e.attributes}`
-            )
+          logger.error(
+            `Generic Attributes: ${e.elementName} has ${e.attributes}`
           );
         }
 
         if (e.type === "GENERIC_VALUE") {
-          console.log(
-            chalk.red(`Generic Values: ${e.elementName} has ${e.values}`)
-          );
+          logger.error(`Generic Values: ${e.elementName} has ${e.values}`);
         }
 
         if (e.type === "MAX_ATTR") {
-          console.log(
-            chalk.red(
-              `Maximum Attributes: ${e.elementName} has ${e.count} attributes`
-            )
+          logger.error(
+            `Maximum Attributes: ${e.elementName} has ${e.count} attributes`
           );
         }
 
         if (e.type === "MAX_ATTR_ARR_LENGTH") {
-          console.log(
-            chalk.red(
-              `Maximum Attribute Array Length: ${e.elementName} ${
-                e.attributeName
-              } has a length of ${e.attributeLength}`
-            )
+          logger.error(
+            `Maximum Attribute Array Length: ${e.elementName} ${
+              e.attributeName
+            } has a length of ${e.attributeLength}`
           );
         }
 
         if (e.type === "MAX_ATTR_STR_LENGTH") {
-          console.log(
-            chalk.red(
-              `Maximum Attribute String Length: ${e.elementName} ${
-                e.attributeName
-              } has a length of ${e.attributeLength}`
-            )
+          logger.error(
+            `Maximum Attribute String Length: ${e.elementName} ${
+              e.attributeName
+            } has a length of ${e.attributeLength}`
           );
         }
 
         if (e.type === "MAX_DEPTH") {
-          console.log(
-            chalk.red(
-              `Maximum Depth: ${e.leafElementName} has a depth of ${e.depth}`
-            )
+          logger.error(
+            `Maximum Depth: ${e.leafElementName} has a depth of ${e.depth}`
           );
         }
 
         if (e.type === "MAX_LINES") {
-          console.log(
-            chalk.red(
-              `Maximum Lines: ${
-                e.count
-              } lines is too long, consider breaking this snapshot down`
-            )
+          logger.error(
+            `Maximum Lines: ${
+              e.count
+            } lines is too long, consider breaking this snapshot down`
           );
         }
       });
@@ -119,14 +113,12 @@ export default (sas: Report[]): void => {
 
       l.warnings.forEach(w => {
         if (w.type === "NO_ELEMENTS_FOUND") {
-          console.log(chalk.yellow("No JSX found"));
+          logger.warn("No JSX found");
         } else {
-          console.log(
-            chalk.yellow(
-              `Max Generic Elements: Too many (${w.count}) generic elements (${
-                w.elementName
-              }) reduce the clarity of a snapshot`
-            )
+          logger.warn(
+            `Max Generic Elements: Too many (${w.count}) generic elements (${
+              w.elementName
+            }) reduce the clarity of a snapshot`
           );
         }
       });
@@ -138,7 +130,7 @@ export default (sas: Report[]): void => {
       !hasErrors &&
       !hasWarnings
     ) {
-      console.log(chalk.green("No issues ✔️"));
+      logger.success("No issues ✔️");
     }
   });
 };

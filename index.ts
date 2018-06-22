@@ -11,14 +11,19 @@ program
   .usage("[...options]")
   .description("A tool to analyse/validate jest snapshots")
   .option("-v --verbose", "whether to log out everything or not")
+  .option(
+    "--ci --ci",
+    "apply ci type behaviours such as silence informative logging and exit with a non zero code"
+  )
   .parse(process.argv);
 
-const { verbose = false } = program;
+const { verbose = false, ci = false } = program;
 
 readFile(path.join(process.cwd(), ".jestlint"), "utf8")
   .then(contents =>
     main(process.cwd(), {
       ...JSON.parse(contents),
+      usingCI: ci,
       isVerbose: verbose
     })
   )
@@ -28,6 +33,7 @@ readFile(path.join(process.cwd(), ".jestlint"), "utf8")
     }
 
     main(process.cwd(), {
+      usingCI: ci,
       isVerbose: verbose
     });
   });
