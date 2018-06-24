@@ -76,6 +76,7 @@ declare module "acorn-jsx" {
   };
 
   type ArrayElement =
+    | ArrayExpression
     | Identifier
     | JSXElement
     | Literal
