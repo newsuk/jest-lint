@@ -19,3 +19,24 @@ exports[`1. snapshot for style block 1`] = `
   Some text
 </Text>
 `;
+
+exports[`2. snapshot for style block with array 1`] = `
+.c0 {
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+}
+
+Array [
+  <styled.h1>
+    <h1
+      className="c0"
+    />
+  </styled.h1>,
+  <styled.h1>
+    <h1
+      className="c0"
+    />
+  </styled.h1>,
+]
+`;

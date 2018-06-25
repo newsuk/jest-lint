@@ -40,15 +40,21 @@ const parseVal = (snapObj: { [key: string]: string }) => (
     });
   } catch (e) {
     // pending outcome of https://github.com/styled-components/jest-styled-components/issues/135
-    const noStyledComponentStyles = sanitised
-      .slice(sanitised.indexOf("<"))
-      .trim();
+    const styledComponentsStyleRegex = /\.c\d {.*}\s*(?=<|Array \[)/gs;
+    const hasStyledComponentStyles = styledComponentsStyleRegex.test(
+      snapObj[key]
+    );
 
-    if (noStyledComponentStyles.length > 0) {
+    if (hasStyledComponentStyles) {
       try {
-        value = acorn.parse(noStyledComponentStyles, {
-          plugins: { jsx: true }
-        });
+        value = acorn.parse(
+          stripJestStructures(
+            snapObj[key].replace(/\.c\d {.*}\s*(?=<|Array \[)/gs, "")
+          ),
+          {
+            plugins: { jsx: true }
+          }
+        );
       } catch (e) {}
     }
 
