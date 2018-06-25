@@ -121,7 +121,25 @@ const analyseSnapshot = (snapshot: ParsedTest): TestAnalysis => {
     };
   }
 
-  const [{ expression }] = snapshot.value.body;
+  if (snapshot.value.body.length === 0) {
+    return {
+      key: snapshot.key,
+      lines: snapshotLength,
+      elements: []
+    };
+  }
+
+  const [body] = snapshot.value.body;
+
+  if (body.type !== "ExpressionStatement") {
+    return {
+      key: snapshot.key,
+      lines: snapshotLength,
+      elements: []
+    };
+  }
+
+  const { expression } = body;
 
   if (expression.type !== "JSXElement") {
     return {
