@@ -34,7 +34,7 @@ export default async (cwd: Dir, opts: Options) => {
 
   const results = await Promise.all(snapshots.map(analyse));
 
-  const criteria = report({
+  const criteria = {
     genericAttrs: opts.genericAttributes || [],
     genericValues: opts.genericValues || ["[Function]"],
     maxAttr: opts.maxAttributes || 5,
@@ -44,11 +44,13 @@ export default async (cwd: Dir, opts: Options) => {
     maxFileSize: opts.maxFileSize || 10000,
     maxGenericElement: opts.maxGenericElements || 10,
     maxLines: opts.maxLines || 300
-  });
+  };
 
-  const output = results.map(r => criteria(r));
+  const reporter = report(criteria);
 
-  writer(output, {
+  const output = results.map(r => reporter(r));
+
+  writer(criteria, output, {
     errorsOnly: opts.usingCI,
     isVerbose: opts.isVerbose
   });

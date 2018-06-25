@@ -1,4 +1,4 @@
-import { Report, TestError } from "./types";
+import { Criteria, Report, TestError } from "./types";
 import Logger from "./logger";
 
 const sortByType = (a: TestError, b: TestError): -1 | 0 | 1 => {
@@ -18,7 +18,11 @@ type Options = {
   isVerbose?: boolean;
 };
 
-export default (sas: Report[], opts: Options = {}): void => {
+export default (
+  criteria: Criteria,
+  sas: Report[],
+  opts: Options = {}
+): void => {
   const logger = new Logger({
     errorsOnly: opts.errorsOnly,
     isVerbose: opts.isVerbose
@@ -33,9 +37,9 @@ export default (sas: Report[], opts: Options = {}): void => {
 
     sa.errors.forEach(e => {
       logger.error(
-        `• ${
-          e.size
-        } bytes is too large, consider breaking your tests into separate snapshot files`
+        `• ${e.size} bytes is larger than ${
+          criteria.maxFileSize
+        }, consider breaking your tests into separate snapshot files`
       );
     });
 
@@ -62,17 +66,25 @@ export default (sas: Report[], opts: Options = {}): void => {
       l.errors.forEach(e => {
         if (e.type === "GENERIC_ATTR") {
           logger.error(
-            `Generic Attributes: ${e.elementName} has ${e.attributes}`
+            `Generic Attributes: ${e.elementName} has ${e.attributes}, max (${
+              criteria.genericAttrs
+            })`
           );
         }
 
-        if (e.type === "GENERIC_VALUE") {
-          logger.error(`Generic Values: ${e.elementName} has ${e.values}`);
+        if (e.type === "GENERIC_VALUE" && criteria.genericValues) {
+          logger.error(
+            `Generic Values: ${e.elementName} has ${
+              e.values
+            }, disallowed [${criteria.genericValues.join(", ")}]`
+          );
         }
 
         if (e.type === "MAX_ATTR") {
           logger.error(
-            `Maximum Attributes: ${e.elementName} has ${e.count} attributes`
+            `Maximum Attributes: ${e.elementName} has ${
+              e.count
+            } attributes, max (${criteria.maxAttr})`
           );
         }
 
@@ -80,7 +92,9 @@ export default (sas: Report[], opts: Options = {}): void => {
           logger.error(
             `Maximum Attribute Array Length: ${e.elementName} ${
               e.attributeName
-            } has a length of ${e.attributeLength}`
+            } has a length of ${e.attributeLength}, max (${
+              criteria.maxAttrArrayLength
+            })`
           );
         }
 
@@ -88,21 +102,25 @@ export default (sas: Report[], opts: Options = {}): void => {
           logger.error(
             `Maximum Attribute String Length: ${e.elementName} ${
               e.attributeName
-            } has a length of ${e.attributeLength}`
+            } has a length of ${e.attributeLength}, max (${
+              criteria.maxAttrStringLength
+            })`
           );
         }
 
         if (e.type === "MAX_DEPTH") {
           logger.error(
-            `Maximum Depth: ${e.leafElementName} has a depth of ${e.depth}`
+            `Maximum Depth: ${e.leafElementName} has a depth of ${
+              e.depth
+            }, max (${criteria.maxDepth})`
           );
         }
 
         if (e.type === "MAX_LINES") {
           logger.error(
-            `Maximum Lines: ${
-              e.count
-            } lines is too long, consider breaking this snapshot down`
+            `Maximum Lines: ${e.count} lines is longer than ${
+              criteria.maxLines
+            }, consider breaking this snapshot down`
           );
         }
       });
@@ -118,7 +136,9 @@ export default (sas: Report[], opts: Options = {}): void => {
           logger.warn(
             `Max Generic Elements: Too many (${w.count}) generic elements (${
               w.elementName
-            }) reduce the clarity of a snapshot`
+            }) reduce the clarity of a snapshot, max(${
+              criteria.maxGenericElement
+            })`
           );
         }
       });
