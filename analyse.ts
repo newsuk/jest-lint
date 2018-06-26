@@ -24,7 +24,7 @@ const extractProp = (prop: Property) => ({
   value: sanitiseValue(prop.value.value)
 });
 
-const extractElement = (depth: number) => (element: ArrayElement) => {
+const extractElement = (depth: number) => (element: ArrayElement): Object => {
   if (element.type === "Identifier") {
     return element.name;
   } else if (element.type === "Literal") {
@@ -33,6 +33,8 @@ const extractElement = (depth: number) => (element: ArrayElement) => {
     return element.argument.value;
   } else if (element.type === "JSXElement") {
     return traverse(depth + 1)(element);
+  } else if (element.type === "ArrayExpression") {
+    return element.elements.map(extractElement(depth));
   }
 
   return element.properties.map(extractProp);
@@ -86,6 +88,7 @@ const traverse = (depth: number) => (x: JSXElement): Element[] => {
   const oe = x.openingElement;
 
   const elementName = oe.name.name;
+
   const props = oe.attributes.map(extractProps(depth));
 
   return [
