@@ -4,7 +4,7 @@
   "description": "A tool to analyse/validate jest snapshots",
   "main": "index.js",
   "scripts": {
-    "coveralls": "nyc --reporter=text-lcov | coveralls",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "coverage:report": "nyc report --reporter=html",
     "generate-snaps": "BABEL_ENV=fg jest",
     "prepublishOnly": "yarn tsc",
