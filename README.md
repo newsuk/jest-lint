@@ -11,7 +11,7 @@ snapshots
 Install globally or locally
 
 ```
-yarn @thetimes/jest-lint --dev
+yarn add --dev @thetimes/jest-lint 
 ```
 
 ## Run
