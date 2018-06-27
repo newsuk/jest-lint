@@ -30,7 +30,9 @@
     "testMatch": [
       "**/generate-snapshots.js",
       "**/generate-style-snapshots.js"
-    ]
+    ],
+    "testEnvironment": "jsdom",
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "devDependencies": {
     "@times-components/jest-serializer": "1.0.1",
@@ -42,6 +44,7 @@
     "babel-preset-react-native": "4.0.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
+    "enzyme-to-json": "3.3.4",
     "jest": "23.0.0",
     "jest-styled-components": "5.0.1",
     "nyc": "11.8.0",

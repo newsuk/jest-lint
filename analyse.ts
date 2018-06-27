@@ -87,7 +87,10 @@ const flatten = (depth: number) => (ys: Element[], y: JSXElement) => {
 const traverse = (depth: number) => (x: JSXElement): Element[] => {
   const oe = x.openingElement;
 
-  const elementName = oe.name.name;
+  const elementName =
+    oe.name.type === "JSXIdentifier"
+      ? oe.name.name
+      : `${oe.name.object.name}.${oe.name.property.name}`;
 
   const props = oe.attributes.map(extractProps(depth));
 
@@ -143,6 +146,20 @@ const analyseSnapshot = (snapshot: ParsedTest): TestAnalysis => {
   }
 
   const { expression } = body;
+
+  if (expression.type === "ArrayExpression") {
+    return {
+      key: snapshot.key,
+      lines: snapshotLength,
+      elements: expression.elements.reduce((es, element) => {
+        if (element.type !== "JSXElement") {
+          return es;
+        }
+
+        return [...es, ...traverse(0)(element)];
+      }, [])
+    };
+  }
 
   if (expression.type !== "JSXElement") {
     return {

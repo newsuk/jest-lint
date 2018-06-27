@@ -98,12 +98,20 @@ declare module "acorn-jsx" {
     value: JSXExpressionContainer | Literal;
   };
 
+  type JSXMemberExpression = {
+    type: "JSXMemberExpression";
+    start: number;
+    end: number;
+    object: JSXIdentifier;
+    property: JSXIdentifier;
+  };
+
   type JSXOpeningElement = {
     type: "JSXOpeningElement";
     start: number;
     end: number;
     attributes: JSXAttribute[];
-    name: JSXIdentifier;
+    name: JSXIdentifier | JSXMemberExpression;
     selfClosing: false;
   };
 
@@ -137,7 +145,7 @@ declare module "acorn-jsx" {
     type: "ExpressionStatement";
     start: number;
     end: number;
-    expression: JSXElement;
+    expression: ArrayExpression | JSXElement;
   };
 
   type BlockStatement = {
