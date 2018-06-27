@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/newsuk/jest-lint/badge.svg?branch=master)](https://coveralls.io/github/newsuk/jest-lint?branch=master)
+[![Build Status](https://travis-ci.org/newsuk/jest-lint.svg?branch=master)](https://travis-ci.org/newsuk/jest-lint)
+
 # jest-lint
 
 A linter for Jest snapshots to help you write (in a very opinionated way) "better"

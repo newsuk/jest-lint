@@ -4,6 +4,7 @@
   "description": "A tool to analyse/validate jest snapshots",
   "main": "index.js",
   "scripts": {
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "coverage:report": "nyc report --reporter=html",
     "generate-snaps": "BABEL_ENV=fg jest",
     "prepublishOnly": "yarn tsc",
@@ -42,6 +43,7 @@
     "@types/node": "10.1.0",
     "ava": "1.0.0-beta.4",
     "babel-preset-react-native": "4.0.0",
+    "coveralls": "^3.0.1",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
     "enzyme-to-json": "3.3.4",
