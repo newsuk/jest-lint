@@ -41,7 +41,7 @@ Array [
 ]
 `;
 
-exports[`3. snapshot for style block and style components 1`] = `
+exports[`3. snapshot for style block and styled components 1`] = `
 .c0 {
   font-size: 1.5em;
   text-align: center;

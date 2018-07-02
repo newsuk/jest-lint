@@ -60,7 +60,7 @@ it("2. snapshot for style block with array", () => {
   expect(wrapper).toMatchSnapshot();
 });
 
-it("3. snapshot for style block and style components", () => {
+it("3. snapshot for style block and styled components", () => {
   const styles = StyleSheet.create({
     test: {
       color: "blue"
