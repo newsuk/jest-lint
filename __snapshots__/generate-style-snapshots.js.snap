@@ -40,3 +40,30 @@ Array [
   </styled.h1>,
 ]
 `;
+
+exports[`3. snapshot for style block and style components 1`] = `
+.c0 {
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+}
+
+<style>
+{
+  "IS1": {
+    "color": "blue",
+  },
+  "IS2": {
+    "color": "blue",
+  },
+}
+</style>
+
+<styled.h1
+  className="IS2"
+>
+  <h1
+    className="c0 IS1"
+  />
+</styled.h1>
+`;
