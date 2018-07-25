@@ -1,6 +1,6 @@
 {
   "name": "@thetimes/jest-lint",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "description": "A tool to analyse/validate jest snapshots",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,9 @@
       "**/generate-style-snapshots.js"
     ],
     "testEnvironment": "jsdom",
-    "snapshotSerializers": ["enzyme-to-json/serializer"]
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   },
   "devDependencies": {
     "@times-components/jest-serializer": "1.0.1",
