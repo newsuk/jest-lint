@@ -39,7 +39,7 @@ export default async (cwd: Dir, opts: Options) => {
     genericValues: opts.genericValues || ["[Function]"],
     maxAttr: opts.maxAttributes || 5,
     maxAttrArrayLength: opts.maxAttributeArrayLength || 5,
-    maxAttrStringLength: opts.maxAttributeStringLength || 30,
+    maxAttrStringLength: opts.maxAttributeStringLength || 32,
     maxDepth: opts.maxDepth || 10,
     maxFileSize: opts.maxFileSize || 10000,
     maxGenericElement: opts.maxGenericElements || 10,
