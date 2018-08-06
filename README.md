@@ -118,7 +118,7 @@ interest to the test and can be shortened for easier diffing, certainly for list
 
 **config option**: `maxAttributeStringLength: number`
 
-**default**: `30`
+**default**: `32`
 
 If a prop has a value that is very long it is unlikely the whole value is of
 interest to the test and can be shortened to an example for easier diffing
