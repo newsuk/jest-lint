@@ -1,4 +1,4 @@
-import { test } from "ava";
+import test from "ava";
 import * as path from "path";
 import analyse from "./analyse";
 
