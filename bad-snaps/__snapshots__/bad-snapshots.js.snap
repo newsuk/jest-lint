@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`1. snapshot for simple-rn-component 1`] = `
+<View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+    ellipsizeMode="tail"
+  >
+    Hello World!
+  </Text>
+</View>
+`;

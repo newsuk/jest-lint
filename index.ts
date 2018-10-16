@@ -35,5 +35,5 @@ readFile(path.join(process.cwd(), ".jestlint"), "utf8")
     main(process.cwd(), {
       usingCI: ci,
       isVerbose: verbose
-    });
+    }).catch(() => process.exit(1));
   });

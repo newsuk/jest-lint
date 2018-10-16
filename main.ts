@@ -1,4 +1,5 @@
 import * as glob from "glob";
+import * as path from "path";
 import chalk from "chalk";
 import analyse from "./analyse";
 import report from "./report";
@@ -22,12 +23,14 @@ const getSnapshots = (cwd: Dir, snapPattern?: string) =>
           console.log(chalk.yellow("No snaps were found"));
         }
 
-        return res(matches);
+        return res(matches.map(p => path.join(cwd, p)));
       }
     );
   });
 
-const reportHasError = (r: Report) => r.errors.length > 0;
+const reportHasError = (r: Report) =>
+  r.errors.length > 0 ||
+  r.lints.some(l => (l.error && l.error.length > 0) || l.errors.length > 0);
 
 export default async (cwd: Dir, opts: Options) => {
   const snapshots = await getSnapshots(cwd, opts.snapPattern);
@@ -56,6 +59,6 @@ export default async (cwd: Dir, opts: Options) => {
   });
 
   if (output.some(reportHasError)) {
-    process.exit(1);
+    throw new Error("Report has at least one error");
   }
 };
