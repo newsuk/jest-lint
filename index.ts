@@ -25,6 +25,12 @@ readFile(path.join(process.cwd(), ".jestlint"), "utf8")
       ...JSON.parse(contents),
       usingCI: ci,
       isVerbose: verbose
+    }).catch(e => {
+      if (verbose) {
+        console.log(e);
+      }
+
+      process.exit(1);
     })
   )
   .catch(() => {
